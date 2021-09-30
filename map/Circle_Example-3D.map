@@ -1,0 +1,90 @@
+MAP 
+    NAME "circle_3D"
+    STATUS ON
+    MAXSIZE 10000
+    SIZE 800 600  
+	# IMAGECOLOR "#99CCFF"
+	
+    EXTENT 1812865 8197909 2061184 8415964
+    UNITS METERS
+	SHAPEPATH "../data" 
+    # CONFIG "MS_ERRORFILE" "/tmp/debug_circle_3D.txt" 
+    CONFIG "PROJ_LIB" "."
+    DEBUG 5
+	CONFIG "ON_MISSING_DATA" "LOG"
+	# CONFIG "MS_OPENLAYERS_JS_URL" "LocalOpenLayers/OpenLayers-ms60.js"
+
+    PROJECTION
+        "init=epsg:3857"
+    END
+    
+    WEB
+        IMAGEPATH "/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+			"wms_title" "Circle_3D"
+            "wms_srs"  "EPSG:3857 EPSG:900913 EPSG:3006 EPSG:4326 EPSG:32633"
+            "wms_enable_request"  "*"
+        END
+    END
+    
+    SYMBOL
+		NAME cross1
+		TYPE VECTOR
+		POINTS
+			0.5 0
+			0.5 1
+			-99 -99
+			0 0.5
+			1 0.5
+		END
+	END
+	
+	# Draw circle with sql in the vrt file 
+		
+		
+	LAYER 
+    	NAME "circle"
+		CONNECTIONTYPE OGR
+		CONNECTION "points_3857_label.vrt"
+		DATA full_circle
+		STATUS default
+		TYPE LINE
+		CLASS
+			NAME "circle"
+			STYLE
+				WIDTH 3.2
+				PATTERN 6 6 END
+				COLOR 255 94 19
+			END
+		    LABEL
+				TEXT ("[label_1]" + " " + tostring([distance],"%.0f") + " radius")
+				SIZE 15
+				COLOR 200 100 100
+				ANGLE FOLLOW
+				OFFSET 5 99
+			END
+		END
+	END 
+
+    LAYER
+		NAME "points"
+	    GROUP "default"
+		CONNECTIONTYPE OGR
+		CONNECTION "points_3857_label.vrt"
+		DATA points_3857
+		STATUS default
+		TYPE POINT
+
+		CLASS
+			NAME "point"
+		    LABEL
+				TEXT "[label_2]"
+				SIZE 15
+				COLOR 0 0 0
+				POSITION CC
+			END
+		END  # Class
+	END  # Layer
+
+END

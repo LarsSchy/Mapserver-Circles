@@ -1,0 +1,49 @@
+MAP 
+    NAME "circle_1A"
+    STATUS ON
+    MAXSIZE 10000
+    SIZE 800 600  
+	# IMAGECOLOR "#99CCFF"
+	
+    EXTENT 1812865 8197909 2061184 8415964
+    UNITS METERS
+	SHAPEPATH "../data" 
+    CONFIG "MS_ERRORFILE" "/tmp/debug_circle_1A.txt" 
+    CONFIG "PROJ_LIB" "."
+    DEBUG 5
+	CONFIG "ON_MISSING_DATA" "LOG"
+	# CONFIG "MS_OPENLAYERS_JS_URL" "LocalOpenLayers/OpenLayers-ms60.js"
+
+    PROJECTION
+        "init=epsg:3857"
+    END
+    
+    WEB
+        IMAGEPATH "/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+			"wms_title" "Circle_1A"
+            "wms_srs"  "EPSG:3857 EPSG:900913 EPSG:3006 EPSG:4326 EPSG:32633"
+            "wms_enable_request"  "*"
+        END
+    END
+	
+	# Draw inline circles that are preprocessed
+	
+	#LAYER
+		#NAME "Sweden"
+		#TYPE RASTER
+		#DATA "../data/sverigekartan/s1milj.tif"
+		#STATUS ON
+		#PROJECTION
+			#"init=epsg:3006"
+		#END
+		#PROCESSING "OVERSAMPLE_RATIO=1.0"
+		#PROCESSING "RESAMPLE=BILINEAR"
+	#END
+	
+	
+	
+	INCLUDE "circle_incl.map"
+
+END

@@ -1,0 +1,53 @@
+MAP 
+    NAME "circle_3A"
+    STATUS ON
+    MAXSIZE 10000
+    SIZE 800 600  
+	# IMAGECOLOR "#99CCFF"
+	
+    EXTENT 1812865 8197909 2061184 8415964
+    UNITS METERS
+	SHAPEPATH "../data" 
+    # CONFIG "MS_ERRORFILE" "/tmp/debug_circle_3A.txt" 
+    CONFIG "PROJ_LIB" "."
+    DEBUG 5
+	CONFIG "ON_MISSING_DATA" "LOG"
+	# CONFIG "MS_OPENLAYERS_JS_URL" "LocalOpenLayers/OpenLayers-ms60.js"
+
+    PROJECTION
+        "init=epsg:3857"
+    END
+    
+    WEB
+        IMAGEPATH "/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+			"wms_title" "Circle_3A"
+            "wms_srs"  "EPSG:3857 EPSG:900913 EPSG:3006 EPSG:4326 EPSG:32633"
+            "wms_enable_request"  "*"
+        END
+    END
+	
+	# Draw circle with sql in the vrt file 
+		
+		
+	LAYER 
+    	NAME "circle"
+		CONNECTIONTYPE OGR
+		CONNECTION "points_3857.vrt"
+		DATA full_circle
+		STATUS default
+		TYPE LINE
+		
+		CLASS
+			NAME "circle"
+			STYLE
+				WIDTH 3.2
+				PATTERN 6 6 END
+				COLOR 255 94 19
+				POSITION cc
+			END	
+		END
+	END 
+
+END

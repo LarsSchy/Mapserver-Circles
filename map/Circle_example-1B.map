@@ -1,0 +1,57 @@
+MAP 
+    NAME "circle_1B"
+    STATUS ON
+    MAXSIZE 10000
+    SIZE 800 600  
+	# IMAGECOLOR "#99CCFF"
+	
+    EXTENT 1812865 8197909 2061184 8415964
+    UNITS METERS
+	SHAPEPATH "../data" 
+    # CONFIG "MS_ERRORFILE" "/tmp/debug_circle_1B.txt" 
+    CONFIG "PROJ_LIB" "."
+    DEBUG 5
+	CONFIG "ON_MISSING_DATA" "LOG"
+	# CONFIG "MS_OPENLAYERS_JS_URL" "LocalOpenLayers/OpenLayers-ms60.js"
+
+    PROJECTION
+        "init=epsg:3857"
+    END
+    
+    WEB
+        IMAGEPATH "/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+			"wms_title" "Circle_1B"
+            "wms_srs"  "EPSG:3857 EPSG:900913 EPSG:3006 EPSG:4326 EPSG:32633"
+            "wms_enable_request"  "*"
+        END
+    END
+	
+	# Draw inline circles that are preprocessed
+	
+	LAYER
+		NAME "inline_circles_WKT"
+		GROUP "default"
+		TYPE CIRCLE
+		STATUS default
+		# CONNECTIONTYPE OGR
+		# CONNECTION "point_circ_wkt.vrt"
+		DATA point_circ_wkt
+		CLASS
+			STYLE
+				COLOR 0 255 0
+				OPACITY 10
+				OUTLINECOLOR 0 0 200
+				PATTERN 12 6 END
+				WIDTH 12
+			END
+			LABEL
+				TEXT "HEJ HEJ"
+				SIZE 15
+				COLOR 0 0 0
+			END	
+		END
+	END
+
+END

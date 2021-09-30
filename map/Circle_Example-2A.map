@@ -1,0 +1,53 @@
+MAP 
+    NAME "circle_2A"
+    STATUS ON
+    MAXSIZE 10000
+    SIZE 800 600  
+	# IMAGECOLOR "#99CCFF"
+	
+    EXTENT 1812865 8197909 2061184 8415964
+    UNITS METERS
+	SHAPEPATH "../data" 
+    # CONFIG "MS_ERRORFILE" "/tmp/debug_circle_2A.txt" 
+    CONFIG "PROJ_LIB" "."
+    DEBUG 5
+	CONFIG "ON_MISSING_DATA" "LOG"
+	# CONFIG "MS_OPENLAYERS_JS_URL" "LocalOpenLayers/OpenLayers-ms60.js"
+
+    PROJECTION
+        "init=epsg:3857"
+    END
+    
+    WEB
+        IMAGEPATH "/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+			"wms_title" "Circle_2A"
+            "wms_srs"  "EPSG:3857 EPSG:900913 EPSG:3006 EPSG:4326 EPSG:32633"
+            "wms_enable_request"  "*"
+        END
+    END
+	
+	# Draw CIRCULARSTRING features from the csv file
+	
+	LAYER
+        NAME "curves_CS"
+        TYPE LINE
+        GROUP "default"
+        CONNECTIONTYPE OGR
+        CONNECTION "point_circ_str.csv"
+        STATUS ON
+        
+        CLASS
+			# EXPRESSION ([ID] = 1)
+			STYLE
+				LINECAP BUTT
+				WIDTH 2.5
+				COLOR 255 0 0
+				OFFSET 5 -99
+				PATTERN 15 6 END
+			END
+		END
+    END
+
+END
