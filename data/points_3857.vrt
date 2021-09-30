@@ -1,0 +1,18 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="points_3857">
+        <SrcDataSource relativeToVRT="1">points_3857.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>EPSG:3857</LayerSRS>
+        <GeometryField encoding="PointFromColumns" x="east" y="north"/>
+    </OGRVRTLayer>
+	
+	<OGRVRTLayer name='full_circle'>
+		<SrcDataSource relativeToVRT="1">points_3857.csv</SrcDataSource>
+		<LayerSRS>EPSG:3857</LayerSRS>
+		<SrcSQL dialect='sqlite'>
+		SELECT ID, distance,
+              MakeCircle(CAST(east AS float),CAST(north AS float), CAST(distance as float), 3857, 5) as Geometry
+		FROM points_3857
+     </SrcSQL>
+     </OGRVRTLayer>
+</OGRVRTDataSource>

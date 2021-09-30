@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="point_circ_wkt">
+		<SrcDataSource relativeToVRT="1">point_circ_wkt.csv</SrcDataSource>
+		<GeometryType>wkbMultiPoint</GeometryType>
+		<LayerSRS>EPSG:3857</LayerSRS>
+		<GeometryField encoding="WKT" field='POINTS' > </GeometryField >
+     </OGRVRTLayer>
+</OGRVRTDataSource>
